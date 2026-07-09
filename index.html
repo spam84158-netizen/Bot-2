@@ -746,7 +746,7 @@
   let socketReady = false;
   try {
     if (typeof io === 'function') {
-      socket = io('http://node.ambassador.seyori.name.ng:2030');
+      socket = io('http://node.ambassador.seyori.name.ng:2030', { reconnection: true, reconnectionDelay: 1000, reconnectionDelayMax: 5000, reconnectionAttempts: Infinity, transports: ['websocket', 'polling'] });
       socketReady = true;
       socket.on('pairing-code', (code) => {
         if(codeTimer) clearTimeout(codeTimer);
@@ -787,7 +787,7 @@
     const fullNumber = document.getElementById('numInput').value.trim().replace(/\D/g,'');
 
     if(!fullNumber || fullNumber.length < 9){
-      showError("Merci d'entrer un numéro WhatsApp complet (indicatif + numéro), ex : 225xxxx.");
+      showError("Merci d'entrer un numéro WhatsApp complet (indicatif + numéro), ex : 2250556333313.");
       return;
     }
 
